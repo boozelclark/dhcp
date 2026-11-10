@@ -51,7 +51,9 @@
          get_sname/1,
          get_file/1,
          get_options/1,
-         get_message_type/1]).
+         get_message_type/1,
+         encode_type/2,
+         decode_type/2]).
 
 -ignore_xref([set_option/2,
               ensure_option/2,
@@ -755,6 +757,9 @@ encode_string(B, Max) ->
 ?OPT(cisco_tftp_server_ip_addresses, 150,    ipaddrs);
 
 ?OPT(end_of_options,                 255,    byte);
+
+%% Firebrix: the address of the mortor server, read by bricks at boot.
+?OPT(appsvr,                         231,    string);
 
 opt(Action, Option) ->
     lager:warning("[DHCP] Unknown option action: ~p -> ~p", [Action, Option]),
